@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-learning-pod
+  labels:
+    app: k8s-learning
+spec:
+  containers:
+    - name: api
+      image: kabu03/k8s-learning:v0.1
+      ports:
+        - containerPort: 8000
