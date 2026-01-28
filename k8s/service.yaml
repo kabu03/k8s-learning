@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: k8s-learning-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: k8s-learning
   ports:
