@@ -14,6 +14,32 @@ spec:
     spec:
       containers:
         - name: api
-          image: kabu03/k8s-learning:v0.1
+          image: kabu03/k8s-learning:v0.3
           ports:
             - containerPort: 8000
+          env:
+            # Kubernetes DNS resolves "postgres" -> ClusterIP of the postgres Service.
+            - name: DB_HOST
+              value: postgres
+
+            - name: DB_PORT
+              value: "5432"
+
+            # Pull DB name/user/password from the postgres-secret object (created from .env).
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  ports:
+    - port: 5432 # This is the port the Service itself exposes
+      targetPort: 5432 # This is the port on the Pod that the traffic is forwarded to.
+      # ^ It must match the port that the Postgres process in the container is listening on.
+  selector:
+    app: postgres
